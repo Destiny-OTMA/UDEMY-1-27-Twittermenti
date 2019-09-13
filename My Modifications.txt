@@ -1,0 +1,141 @@
+//
+//  ViewController.swift
+//  Twittermenti
+//
+//  Created by Angela Yu on 07/17/2018.
+//  Modifieed by Destiny Sopha stating on 09/05/2019.
+//  Copyright © 2018 London App Brewery. All rights reserved.
+//
+
+import UIKit
+import SwifteriOS
+import CoreML
+import SwiftyJSON
+import Foundation
+
+class ViewController: UIViewController {
+  
+// Not in Angela's Code   @IBOutlet weak var backgroundView: UIView!
+  @IBOutlet weak var textField: UITextField!
+  @IBOutlet weak var sentimentLabel: UILabel!
+
+  let tweetsCount = 100
+  let sentimentClassifier = TweetSentimentClassifier()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+}
+  
+  @IBAction func predictPressed(_ sender: Any) {
+    
+    fetchTweets()
+    
+  }
+  
+  func fetchTweets() {
+    
+    if let searchText = textField.text {
+
+    let apiKeyID = valueForAPIKey(named:"API Key")
+    let apiSecretKeyID = valueForAPIKey(named:"API Secret Key")
+      
+    let swifter = Swifter(consumerKey: apiKeyID, consumerSecret: apiSecretKeyID)
+
+      
+      swifter.searchTweet(using: searchText, lang: "en", count: tweetsCount, tweetMode: .extended, success: { (results, metadata) in
+        
+        var tweets = [TweetSentimentClassifierInput]()
+        
+        for i in 0..<self.tweetsCount {
+          
+          if let tweet = results[i]["full_text"].string {
+            let tweetForClassification = TweetSentimentClassifierInput(text: tweet)
+            tweets.append(tweetForClassification)
+          }
+          
+        }
+        
+        self.makePrediction(with: tweets)
+        
+      }) { (error) in
+        print("There was an error with the Twitter API Request, \(error)")
+      }
+      
+    }
+    
+  }
+  
+  func makePrediction(with tweets: [TweetSentimentClassifierInput]) {
+    
+    do {
+      let predictions = try self.sentimentClassifier.predictions(inputs: tweets)
+      
+      var sentimentScore = 0
+      
+      for pred in predictions {
+        let sentiment = pred.label
+        
+        if sentiment == "Pos" {
+          sentimentScore += 1
+        } else if sentiment == "Neg" {
+          sentimentScore -= 1
+        }
+      }
+      
+      updateUI(with: sentimentScore)
+      
+    } catch {
+      print("There was an error with making a prediction, \(error)")
+    }
+    
+  }
+  
+  func updateUI(with sentimentScore: Int) {
+    
+    switch sentimentScore {
+      case 21 ... tweetsCount: self.sentimentLabel.text = "😍"
+      case 11 ... 20: self.sentimentLabel.text = "😀"
+      case 1 ... 10: self.sentimentLabel.text = "🙂"
+      case 0: self.sentimentLabel.text = "😐"
+      case -9 ... -1: self.sentimentLabel.text = "🙁"
+      case -20 ... -10: self.sentimentLabel.text = "😡"
+      default: self.sentimentLabel.text = "🤮"
+    }
+    
+  }
+  
+}
+
+extension ViewController {
+  
+  func valueForAPIKey(named keyname:String) -> String {
+    // Credit to the original source for this technique at
+    // http://blog.lazerwalker.com/blog/2014/05/14/handling-private-api-keys-in-open-source-ios-apps
+    let filePath = Bundle.main.path(forResource: "Secrets", ofType: "plist")
+    let plist = NSDictionary(contentsOfFile:filePath!)
+    let value = plist?.object(forKey: keyname) as! String
+    return value
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+=====================================================
+
+For GIThuub
+
+
+UDEMY-1-27-Twittermenti
+
+
+This app will look at the sentiment on Twitter for a company to determine if people are in general positive or negative toward a company.
