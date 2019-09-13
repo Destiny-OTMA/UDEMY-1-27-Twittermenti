@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56AFA667232BFF0E00A13802 /* TweetSentimentClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 56AFA666232BFF0E00A13802 /* TweetSentimentClassifier.mlmodel */; };
 		56CC181B232ABCB000FC72A7 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56CC181A232ABCB000FC72A7 /* Secrets.plist */; };
 		AD9EC65020FE2EF4002AE9BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EC64F20FE2EF4002AE9BF /* AppDelegate.swift */; };
 		AD9EC65220FE2EF4002AE9BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EC65120FE2EF4002AE9BF /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56AFA666232BFF0E00A13802 /* TweetSentimentClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TweetSentimentClassifier.mlmodel; sourceTree = "<group>"; };
 		56CC181A232ABCB000FC72A7 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		AD9EC64C20FE2EF4002AE9BF /* Twittermenti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twittermenti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9EC64F20FE2EF4002AE9BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		AD9EC64E20FE2EF4002AE9BF /* Twittermenti */ = {
 			isa = PBXGroup;
 			children = (
+				56AFA666232BFF0E00A13802 /* TweetSentimentClassifier.mlmodel */,
 				AD9EC64F20FE2EF4002AE9BF /* AppDelegate.swift */,
 				AD9EC65120FE2EF4002AE9BF /* ViewController.swift */,
 				AD9EC65320FE2EF4002AE9BF /* Main.storyboard */,
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56AFA667232BFF0E00A13802 /* TweetSentimentClassifier.mlmodel in Sources */,
 				AD9EC65220FE2EF4002AE9BF /* ViewController.swift in Sources */,
 				AD9EC65020FE2EF4002AE9BF /* AppDelegate.swift in Sources */,
 			);
