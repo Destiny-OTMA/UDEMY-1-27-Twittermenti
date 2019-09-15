@@ -128,19 +128,3 @@ extension ViewController {
 
 
 
-
-
-=====================================================
-
-For GIThuub
-
-
-UDEMY-1-27-Twittermenti
-
-
-This app will look at the sentiment on Twitter for a company to determine if people are in general positive or negative toward a company.
-
-
-
-
-

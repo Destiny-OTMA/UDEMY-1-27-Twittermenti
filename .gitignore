@@ -1,6 +1,7 @@
 ##Project-Wide
 .DS_Store
 Secrets.plist
+ApiKeys.plist
 My_Modifications.txt
 
 ## User settings
